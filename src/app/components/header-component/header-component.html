@@ -1,26 +1,14 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-main">
-  <div class="container-fluid">
-    <a class="navbar-brand logo-text" href="#">SE-NCU</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link text-white" aria-current="page" routerLink="/home" routerLinkActive="active">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" routerLink="/student" routerLinkActive="active">Student</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" routerLink="/advisor" routerLinkActive="active">Advisor</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" routerLink="/company" routerLinkActive="active">Company</a>
-        </li>
-      </ul>
-      <span class="d-flex"><a role="button" class="btn btn-primary" routerLink="/login">Sign In</a></span>
-      
-    </div>
+<header class="modern-header">
+  <div class="logo-container">
+    <span class="logo-text">SE-NCU</span>
   </div>
-</nav>
+  <nav class="nav-links">
+    <a routerLink="/home" routerLinkActive="active">Home</a>
+    <a routerLink="/student" routerLinkActive="active">Student</a>
+    <a routerLink="/advisor" routerLinkActive="active">Advisor</a>
+    <a routerLink="/company" routerLinkActive="active">Company</a>
+  </nav>
+  <div class="auth-action">
+    <button class="sign-in-btn">Sign In</button>
+  </div>
+</header>

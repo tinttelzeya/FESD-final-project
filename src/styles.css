@@ -1,12 +1,31 @@
-/* You can add global styles to this file, and also import other style files */
-/* เปลี่ยนสีข้อความหรือพื้นหลังของลิงก์ที่ Active ใน Navbar */
+
 .navbar-nav .nav-link.active, 
 .navbar-nav .show > .nav-link {
-  color: #F8E300 !important;         /* สีตัวอักษรเมื่อ Active (เช่น สีขาว) */
-  background-color: #800000 !important; /* สีพื้นหลังเมื่อ Active (เช่น สีมารูน) */
-  border-radius: 4px;                /* เพิ่มความโค้งมนให้สวยงาม (ถ้าต้องการ) */
+  color: #F8E300 !important;         
+  background-color: #800000 !important; 
+  border-radius: 4px;                
 }
 
 .jumbotron {
   background-color: #E9A9A9;
+}
+
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+app-root > *:not(header):not(footer), 
+router-outlet + * {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }

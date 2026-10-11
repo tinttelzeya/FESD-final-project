@@ -32,8 +32,7 @@ export class StudentPage implements OnInit {
       faculty: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       tel: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
-      picture: ['', Validators.required],
-      // password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]]
+      picture: ['', Validators.required]
     });
   }
 
@@ -43,39 +42,36 @@ export class StudentPage implements OnInit {
 
   private getData(): void {
     this.studentService.getAll().subscribe({
-    next: (data) => {
-      this.students = data; // 👈 นำข้อมูลที่ได้มาใส่ตัวแปรนี้ เพื่อให้ @for ใน HTML แสดงผล
-      this.cdr.detectChanges();
-      console.log('Students loaded:', this.students);
-    },
-    error: (err) => {
-      console.error('Error loading students:', err);
-    }
-  });
+      next: (data) => {
+        this.students = data || []; 
+        this.cdr.detectChanges();
+        console.log('Students loaded:', this.students);
+      },
+      error: (err) => {
+        console.error('Error loading students:', err);
+      }
+    });
   }
 
   onSubmit(): void {
     const studentData: Student = this.studentForm.value;
     console.log(studentData);
-    if (this.isEdit) { // update
-      this.studentService.update(this.student!, studentData).subscribe(res => {
-        if (res.message === 'Update completed') {
-          this.getData();
-          alert('OK');
-        } else {
-          alert('ERROR');
-        }
-      });
-    } else { // add
-      this.studentService.create(studentData).subscribe(res => {
-        this.students = res;
-        this.resetForm();
-      });
+
+    if (this.isEdit) { // Update (Local Mock)
+      const index = this.students.findIndex(s => s.studentId === this.student!.studentId);
+      if (index !== -1) {
+        this.students[index] = studentData;
+      }
+      this.resetForm();
+      alert('OK');
+    } else { // Add (Local Mock)
+      this.students.push(studentData);
+      this.resetForm();
     }
   }
 
   selectStudent(selectedStudent: Student): void {
-    this.isEdit = true; // change to edit mode
+    this.isEdit = true; // Change to edit mode
     this.student = selectedStudent;
     this.studentForm.patchValue({
       studentId: selectedStudent.studentId,
@@ -91,20 +87,14 @@ export class StudentPage implements OnInit {
   resetForm(): void {
     this.isEdit = false;
     this.studentForm.reset();
-    this.getData();
   }
 
   deleteStudent(deletedStudent: Student): void {
     if (confirm('Are you sure to delete ' + deletedStudent.studentId)) {
-      // DELETE STUDENT DATA
-      this.studentService.delete(deletedStudent).subscribe(res => {
-        if (res.message === 'Delete Completed.') {
-          this.resetForm();
-          alert('DELETE OK.');
-          this.getData();
-        }
-      });
+      // Delete (Local Mock)
+      this.students = this.students.filter(s => s.studentId !== deletedStudent.studentId);
+      this.resetForm();
+      alert('DELETE OK.');
     }
   }
-
 }

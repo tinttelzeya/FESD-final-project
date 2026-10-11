@@ -1,26 +1,27 @@
-<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="/images/slider1.jpg" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="/images/slider2.jpg" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="/images/slider3.jpg" class="d-block w-100" alt="...">
+<div class="home-container">
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <h1>Welcome to <span class="highlight">SE-NCU</span></h1>
+    <p>Empowering the next generation of software engineers with modern tools and seamless management.</p>
+    <div class="hero-buttons">
+      <a routerLink="/student" class="btn primary-btn">Manage Students</a>
+      <a routerLink="/advisor" class="btn secondary-btn">View Advisors</a>
     </div>
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
+
+  <!-- Feature Cards Section -->
+  <div class="features-grid">
+    <div class="feature-card">
+      <h3>👨‍💻 Students</h3>
+      <p>Manage student profiles, track department details, and handle records efficiently.</p>
+    </div>
+    <div class="feature-card">
+      <h3>🏫 Advisors</h3>
+      <p>Connect with academic advisors and guide your learning path smoothly.</p>
+    </div>
+    <div class="feature-card">
+      <h3>🏢 Companies</h3>
+      <p>Explore internship opportunities and industry partner networks.</p>
+    </div>
+  </div>
 </div>

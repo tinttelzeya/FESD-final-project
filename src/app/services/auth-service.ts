@@ -11,26 +11,25 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   // Login
-  login(credentials: { email: string; password: string }): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}`, credentials).pipe(
-      tap(response => {
-        if (response && response.token) {
-          localStorage.setItem('access_token', response.token);
-        }
-      })
-    );
-  }
+login(credentials: { email: string; password: string }): Observable<any> {
+  // Mock login for testing without backend
+  sessionStorage.setItem('access_token', 'mock_token_123');
+  return new Observable(observer => {
+    observer.next({ token: 'mock_token_123' });
+    observer.complete();
+  });
+}
 
   logout(): void {
-    localStorage.removeItem('access_token');
+    sessionStorage.removeItem('access_token');
   }
 
   isLoggedIn(): boolean {
-    return !!localStorage.getItem('access_token');
+    return !!sessionStorage.getItem('access_token');
   }
 
   getToken(): string | null {
-    return localStorage.getItem('access_token');
+    return sessionStorage.getItem('access_token');
   }
   
 }

@@ -1,5 +1,129 @@
-<div class="jumbotron jumbotron-fluid m-3 py-4 rounded">
-  <div class="container">
-    <h1 class="display-6">Advisor</h1>
+<div class="advisor-page-container">
+  <!-- Modern Jumbotron Banner -->
+  <div class="modern-jumbotron text-center">
+    <div class="container">
+      <h1 class="display-6">Advisor Management</h1>
+      <p>Manage academic advisors, departments, and faculty mentor assignments.</p>
+    </div>
+  </div>
+
+  <div class="container py-4">
+    <div class="centered-content-wrapper">
+
+      
+      <div class="content-card">
+        <h2 class="section-title">Advisor Form</h2>
+        <!-- FORM -->
+        <form [formGroup]="advisorForm" (ngSubmit)="onSubmit()" novalidate class="modern-form">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="advisor-id" placeholder="" formControlName="advisorId"
+              [ngClass]="{'is-invalid': (f['advisorId'].touched) && (f['advisorId'].errors)}">
+            <label for="advisor-id">Advisor ID:</label>
+            @if ((f['advisorId'].touched) && (f['advisorId'].errors)) {
+            <div class="invalid-feedback">
+              @if (f['advisorId']['errors']['required']) {
+              <div>Please enter Advisor ID</div>
+              }
+            </div>
+            }
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="advisor-name" placeholder="" formControlName="advisorName"
+              [ngClass]="{'is-invalid': (f['advisorName'].touched) && (f['advisorName'].errors)}">
+            <label for="advisor-name">Advisor Name:</label>
+            @if ((f['advisorName'].touched) && (f['advisorName'].errors)) {
+            <div class="invalid-feedback">
+              @if (f['advisorName']['errors']['required']) {
+              <div>Please enter Advisor Name</div>
+              }
+            </div>
+            }
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="department" placeholder="" formControlName="department"
+              [ngClass]="{'is-invalid': (f['department'].touched) && (f['department'].errors)}">
+            <label for="department">Department:</label>
+            @if ((f['department'].touched) && (f['department'].errors)) {
+            <div class="invalid-feedback">
+              @if (f['department']['errors']['required']) {
+              <div>Please enter Department Name</div>
+              }
+            </div>
+            }
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="email" placeholder="" formControlName="email"
+              [ngClass]="{'is-invalid': (f['email'].touched) && (f['email'].errors)}">
+            <label for="email">E-mail:</label>
+            @if ((f['email'].touched) && (f['email'].errors)) {
+            <div class="invalid-feedback">
+              @if (f['email']['errors']['required']) {
+              <div>Please enter Email</div>
+              }
+              @if (f['email']['errors']['email']) {
+              <div>Please enter the correct Email</div>
+              }
+            </div>
+            }
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="tel" placeholder="" formControlName="tel"
+              [ngClass]="{'is-invalid': (f['tel'].touched) && (f['tel'].errors)}">
+            <label for="tel">Tel.:</label>
+            @if ((f['tel'].touched) && (f['tel'].errors)) {
+            <div class="invalid-feedback">
+              @if (f['tel']['errors']['required']) {
+              <div>Please enter Telephone Number</div>
+              }
+            </div>
+            }
+          </div>
+
+          <div class="form-actions d-flex gap-2">
+            <button class="btn btn-custom-submit flex-grow-1" type="submit" [disabled]="advisorForm.invalid">Submit</button>
+            <button class="btn btn-custom-reset" type="button" (click)="resetForm()">Reset</button>
+          </div>
+        </form>
+      </div>
+
+      
+      <div class="content-card">
+        <h2 class="section-title">Advisor Records</h2>
+        <div class="table-responsive">
+          <table class="table modern-table align-middle">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Advisor Name</th>
+                <th scope="col">Department</th>
+                <th scope="col">Email</th>
+                <th scope="col" class="text-center">Manage</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (advisor of advisors; track advisor.advisorId) {
+              <tr>
+                <td class="fw-semibold">{{advisor.advisorId}}</td>
+                <td>{{advisor.advisorName}}</td>
+                <td><span class="badge dept-badge">{{advisor.department}}</span></td>
+                <td class="text-muted">{{advisor.email}}</td>
+                <td class="text-center">
+                  <div class="action-btns">
+                    <button class="btn btn-sm btn-custom-update" (click)="selectAdvisor(advisor)">Update</button>
+                    <button class="btn btn-sm btn-custom-delete" (click)="deleteAdvisor(advisor)">Delete</button>
+                  </div>
+                </td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>

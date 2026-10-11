@@ -1,5 +1,116 @@
-<div class="jumbotron jumbotron-fluid m-3 py-4 rounded">
-  <div class="container">
-    <h1 class="display-6">Company</h1>
+<div class="company-page-container">
+  <!-- Modern Jumbotron Banner -->
+  <div class="modern-jumbotron text-center">
+    <div class="container">
+      <h1 class="display-6">Company Management</h1>
+      <p>Manage partner companies, internship placements, and corporate coordinators.</p>
+    </div>
+  </div>
+
+  <div class="container py-4">
+    <div class="centered-content-wrapper">
+
+      
+      <div class="content-card">
+        <h2 class="section-title">Company Form</h2>
+        <!-- FORM -->
+        <form [formGroup]="companyForm" (ngSubmit)="onSubmit()" novalidate class="modern-form">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="company-id" placeholder="" formControlName="companyId"
+              [ngClass]="{'is-invalid': (f['companyId'].touched) && (f['companyId'].errors)}">
+            <label for="company-id">Company ID:</label>
+            @if ((f['companyId'].touched) && (f['companyId'].errors)) {
+            <div class="invalid-feedback">
+              @if (f['companyId']['errors']['required']) {
+              <div>Please enter Company ID</div>
+              }
+            </div>
+            }
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="company-name" placeholder="" formControlName="companyName"
+              [ngClass]="{'is-invalid': (f['companyName'].touched) && (f['companyName'].errors)}">
+            <label for="company-name">Company Name:</label>
+            @if ((f['companyName'].touched) && (f['companyName'].errors)) {
+            <div class="invalid-feedback">
+              @if (f['companyName']['errors']['required']) {
+              <div>Please enter Company Name</div>
+              }
+            </div>
+            }
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="address" placeholder="" formControlName="address"
+              [ngClass]="{'is-invalid': (f['address'].touched) && (f['address'].errors)}">
+            <label for="address">Address:</label>
+            @if ((f['address'].touched) && (f['address'].errors)) {
+            <div class="invalid-feedback">
+              @if (f['address']['errors']['required']) {
+              <div>Please enter Address</div>
+              }
+            </div>
+            }
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="email" placeholder="" formControlName="email"
+              [ngClass]="{'is-invalid': (f['email'].touched) && (f['email'].errors)}">
+            <label for="email">E-mail:</label>
+            @if ((f['email'].touched) && (f['email'].errors)) {
+            <div class="invalid-feedback">
+              @if (f['email']['errors']['required']) {
+              <div>Please enter Email</div>
+              }
+              @if (f['email']['errors']['email']) {
+              <div>Please enter the correct Email</div>
+              }
+            </div>
+            }
+          </div>
+
+          <div class="form-actions d-flex gap-2">
+            <button class="btn btn-custom-submit flex-grow-1" type="submit" [disabled]="companyForm.invalid">Submit</button>
+            <button class="btn btn-custom-reset" type="button" (click)="resetForm()">Reset</button>
+          </div>
+        </form>
+      </div>
+
+      
+      <div class="content-card">
+        <h2 class="section-title">Company Records</h2>
+        <div class="table-responsive">
+          <table class="table modern-table align-middle">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Company Name</th>
+                <th scope="col">Address</th>
+                <th scope="col">Email</th>
+                <th scope="col" class="text-center">Manage</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (company of companies; track company.companyId) {
+              <tr>
+                <td class="fw-semibold">{{company.companyId}}</td>
+                <td>{{company.companyName}}</td>
+                <td>{{company.address}}</td>
+                <td class="text-muted">{{company.email}}</td>
+                <td class="text-center">
+                  <div class="action-btns">
+                    <button class="btn btn-sm btn-custom-update" (click)="selectCompany(company)">Update</button>
+                    <button class="btn btn-sm btn-custom-delete" (click)="deleteCompany(company)">Delete</button>
+                  </div>
+                </td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
